@@ -1,6 +1,8 @@
 package com.manas.booking;
 
 
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -38,6 +40,13 @@ public interface Api {
 
     @PUT("/api/change_pass/")
     Call<Passwords>changePassword(@Header("Authorization") String token, @Body Passwords passwords);
+
+    @GET("/api/stations/")
+    Call<List<Stations>> getStations(@Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/route/")
+    Call<List<Route>> getRoute(@Header("Authorization") String token, @Body Station station);
 
 
 }

@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = paswordEdittext.getText().toString().trim();
         //validateData(mail,password);
 
-        User user  = new User("gulzat","12345678");
+        User user  = new User("gulzat","123456789");
 
         Call<User> call = gsonApi.userLogin(user);
 
@@ -60,24 +60,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
 
-
-                System.out.println("kjdsfhdsbfsh");
-
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-
-
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-                System.out.println("kjdsfhdsbfsh");
-
                 User userResponse = response.body();
                 String token;
                 token  = userResponse.getToken() + "\n";
@@ -85,6 +67,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginStatus = userResponse.getLoginStatus();
 
                 if(!token.isEmpty()){
+                    Preferences prefs = Preferences.userNodeForPackage(com.manas.booking.LoginActivity.class);
+                    prefs.put("isLogged", "true");
+                    prefs.put("token", token);
                     Toast.makeText(LoginActivity.this, "Login succes",Toast.LENGTH_LONG).show();
                     Intent i = new Intent(LoginActivity.this, SearchActivity.class);
                     startActivity(i);
@@ -101,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void registerPage(){
-        Intent i = new Intent(this, MyInfo.class);
+        Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }
 

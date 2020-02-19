@@ -37,4 +37,11 @@ dependencies {
     //for gson converter
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
+    //for RecyclerView
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+    //for  CardView
+    implementation 'com.android.support:cardview-v7:29.0.0'
+
+
+
 }
