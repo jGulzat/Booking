@@ -9,21 +9,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.manas.booking.Model.Route;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Callback;
 
-public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RoutesViewHolder> {
+
+public class RoutesAdapter extends RecyclerView.Adapter <RoutesAdapter.RoutesViewHolder> {
 
     Context mContext;
-    List<Route>mRoute;
+    ArrayList<Route> mRoute = new ArrayList<>();
 
-    public RoutesAdapter(Context mContext, List<Route> mRoute) {
+    public RoutesAdapter(Context mContext, ArrayList<Route> mRoute) {
         this.mContext = mContext;
         this.mRoute = mRoute;
     }
-
-
 
 
     @NonNull
@@ -43,11 +45,6 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RoutesView
         holder.timeTV.setText(mRoute.get(position).getArrive_time());
         holder.dateTV.setText(mRoute.get(position).getDate());
         holder.priceTV.setText(mRoute.get(position).getPrice());
-
-
-
-
-
     }
 
     @Override

@@ -10,9 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.manas.booking.Api;
+import com.manas.booking.Model.User;
 import com.manas.booking.R;
-import com.manas.booking.RegisterActivity;
-import com.manas.booking.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +24,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private Api gsonApi;
     User userInfo;
     private EditText nameEdittext, surnameEdittext, usernameEdittext, emailEdittext;
+    String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +35,12 @@ public class EditProfileActivity extends AppCompatActivity {
         gsonApi = retrofit.create(Api.class);
 
         Bundle arguments = getIntent().getExtras();
+        Intent getIntent = getIntent();
+        token = getIntent.getStringExtra("token");
 
         if (arguments != null)
         {
             userInfo = (User) arguments.getSerializable(User.class.getSimpleName());
-            Log.d("Info", "onCreate: " + userInfo.getFirstname());
             initial(userInfo.getFirstname(),userInfo.getLast_name(),userInfo.getUsername(),userInfo.getEmail());
         }
         else Log.d("error", "onCreate: " + "arguments is null");
@@ -64,9 +65,6 @@ public class EditProfileActivity extends AppCompatActivity {
         userInfo.setLast_name(surnameEdittext.getText().toString());
         userInfo.setUsername(usernameEdittext.getText().toString());
         userInfo.setEmail(emailEdittext.getText().toString());
-
-
-        String token = "6b9b9c17f710630ff74db8c9ad73428bb6ad51b4";
 
         Call<User> call = gsonApi.saveNewInfo("Token " + token, userInfo);
 

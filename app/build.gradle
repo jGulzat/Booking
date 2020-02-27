@@ -31,7 +31,6 @@ dependencies {
     //for navigation bar
     implementation 'com.android.support:design:29.0.0'
 
-
     //for retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     //for gson converter
@@ -41,6 +40,12 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     //for  CardView
     implementation 'com.android.support:cardview-v7:29.0.0'
+
+    //for Google map
+    implementation 'com.google.android.gms:play-services:8.4.0'
+    //for calendarPicker
+    implementation 'com.squareup:android-times-square:1.6.5@aar'
+
 
 
 

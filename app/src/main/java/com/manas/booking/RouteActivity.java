@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.manas.booking.Model.Route;
+import com.manas.booking.Model.Station;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +25,9 @@ public class RouteActivity extends AppCompatActivity {
 
     RecyclerView routesRecycleView;
     RoutesAdapter routesAdapter;
-    List<Route> mRoute;
     Api gsonApi;
     String token;
-   // ArrayList<Route> routes= new ArrayList<>();
+    ArrayList<Route> routes= new ArrayList<>();
 
 
     @Override
@@ -46,9 +48,9 @@ public class RouteActivity extends AppCompatActivity {
 
     public void initial(){
         routesRecycleView = findViewById(R.id.routeRecycleView);
-        mRoute = new ArrayList<>();
+        routesRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-       /* Station station = new Station("2","1","2020-02-12");
+        Station station = new Station("2","1","2020-02-12");
         Call<List<Route>> call = gsonApi.getRoute("Token " + token, station);
         call.enqueue(new Callback<List<Route>>() {
             @Override
@@ -56,15 +58,10 @@ public class RouteActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     routes = new ArrayList<>(response.body());
 
-
-
-                    routesAdapter = new RoutesAdapter(this,routes);
+                    routesAdapter = new RoutesAdapter(RouteActivity.this,routes);
                     routesRecycleView.setAdapter(routesAdapter);
                     Log.d(TAG, "onResponse:  succes\n");
-                    for (int i = 0; i < routes.size(); i++)
-                    {
-                        Log.d(TAG, "onResponse: " + routes.get(i).getFrom());
-                    }
+
                 }
                 else Log.d("Station:  ", "error " + response.code());
             }
@@ -74,21 +71,6 @@ public class RouteActivity extends AppCompatActivity {
                 Log.d("Station:  ", "Failure: " + t.getMessage());
             }
         });
-        routesRecycleView.setLayoutManager(new LinearLayoutManager(this));*/
 
-
-
-
-
-        mRoute.add(new Route("Bishkek","Naryn","02-12-2020",
-                "600som","8.00 ~ 4 остановки ~ 6.00ч","40место ~ 400km"));
-
-        mRoute.add(new Route("Naryn","Naryn","Naryn",
-                "Naryn","Bishkek","Bishkek"));
-
-        routesAdapter = new RoutesAdapter(this,mRoute);
-        //routesAdapter = new RoutesAdapter((Callback<List<Route>>) this,mRoute);
-        routesRecycleView.setAdapter(routesAdapter);
-        routesRecycleView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

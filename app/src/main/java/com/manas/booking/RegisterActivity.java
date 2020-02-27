@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.manas.booking.Model.User;
+
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -30,11 +32,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://avtobeket.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
-
         gsonApi = retrofit.create(Api.class);
 
         initial();
-
     }
 
     private void userSignUp(){
@@ -50,11 +50,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mail = "gulza97@mail.ru";   username = "gulzat";
         password = "12345678";      confirmPassword = "12345678";
 
-
         validateData(name,surname,username,mail,password,confirmPassword);
 
         User newUser  = new User(name,surname,username,mail,password);
-
         Call<User> call = gsonApi.userSignUp(newUser);
 
         call.enqueue(new Callback<User>() {

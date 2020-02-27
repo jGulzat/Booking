@@ -2,6 +2,7 @@ package com.manas.booking.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,11 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.manas.booking.Api;
-import com.manas.booking.Passwords;
+import com.manas.booking.Model.Passwords;
 import com.manas.booking.R;
-import com.manas.booking.User;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,11 +23,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private Api gsonApi;
     private EditText oldPass,newPass,validNewPass;
-    String oldPassword, newPassword, validNewPasword;
+    String oldPassword, newPassword, validNewPasword,token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        Intent getIntent = getIntent();
+        token = getIntent.getStringExtra("token").trim();
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://avtobeket.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -43,12 +44,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
         validNewPasword = validNewPass.getText().toString();
 
         oldPassword =  "12345678";
-        newPassword = "123456789";
-        validNewPasword = "123456789";
+        newPassword = "12345678";
+        validNewPasword = "12345678";
 
-        //if(newPassword == validNewPasword){
+        if(newPassword == validNewPasword){
             Passwords passwords = new Passwords(oldPassword,newPassword);
-            String token = "6b9b9c17f710630ff74db8c9ad73428bb6ad51b4";
+           // String token = "6b9b9c17f710630ff74db8c9ad73428bb6ad51b4";
             Call<Passwords> call = gsonApi.changePassword("Token " + token, passwords);
             call.enqueue(new Callback<Passwords>() {
                 @Override
@@ -65,7 +66,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Log.d("ChangePassword", "onFailureeeeeeeee: " + t.getMessage());
                 }
             });
-        //}
+        }
     }
 
     public void initial(){

@@ -1,4 +1,4 @@
-package com.manas.booking;
+package com.manas.booking.Model;
 
 public class Passwords {
 

@@ -13,10 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.manas.booking.Fragments.SearchActivity;
-import com.manas.booking.Profile.MyInfo;
-
+import com.manas.booking.Model.User;
 import java.util.prefs.Preferences;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,20 +33,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://avtobeket.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
-
         gsonApi = retrofit.create(Api.class);
 
         initial();
-
     }
 
     public void userLogin(){
         String mail = mailEdittext.getText().toString().trim();
         String password = paswordEdittext.getText().toString().trim();
-        //validateData(mail,password);
+        mail = "gulzat"; password = "123456789";
+       // validateData(mail,password);
 
-        User user  = new User("gulzat","123456789");
-
+        User user  = new User(mail,password);
         Call<User> call = gsonApi.userLogin(user);
 
         call.enqueue(new Callback<User>() {
@@ -72,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     prefs.put("token", token);
                     Toast.makeText(LoginActivity.this, "Login succes",Toast.LENGTH_LONG).show();
                     Intent i = new Intent(LoginActivity.this, SearchActivity.class);
+                    i.putExtra("token",token);
                     startActivity(i);
                     Log.d("LoginActivity", "0000000000token: " + token + "login status:" + loginStatus);
                 }
@@ -79,10 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d("LoginActivity", "onFailureeeeeeeee: " + t.getMessage());
-
             }
         });
-
     }
 
     public void registerPage(){
